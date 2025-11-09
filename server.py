@@ -1,16 +1,17 @@
 # libs usadas no trabalho, elas vao estar no venv, entao tem que rodar o source venv/bin/activate
 from datetime import datetime
 import socket
-
+from BlockChain import Bloco, Blockchain
 
 current_datetime = datetime.now()
-
-print("====================================")
+print("============================================================")
 print("INICIO DA EXECUCAO DO SERVIDOR")
 print("TRABALHO DE REDES 2 PROFESSOR ELIAS")
 print(f"UNIVERSIDADE FEDERAL DO PARANÁ, {current_datetime}")
+print("============================================================")
 
 
+conta_blockchain = Blockchain(2000)  # saldo inicial da conta e criacao de fato da conta no servidor
 
 #cria o socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -50,11 +51,39 @@ while True:
             print(f"[{datetime.now()}] Conexão com {addr} encerrada.")
             break
 
+        #tadd pois eh "type add" (de adicionar na conta)
         if data[0:4] == "tadd":
-            print(f"[{datetime.now()}] RECEBIDA UMA OPERACAO DE ADD NA CONTA")  
-            conn.send("RECEBIDO CONN ADD".encode())
+            print(f"[{datetime.now()}] RECEBIDA UMA SOLICITACAO DE DEPOSITO")
+            try:
+                conta_blockchain.adicionar_bloco('deposito', int(data[5:]))
+                conn.send(f"[{datetime.now()}] OPERACAO DE DEPOSITO BEM SUCEDIDA".encode())
+                print(f"[{datetime.now()}] OPERACAO DE DEPOSITO BEM SUCEDIDA")
+            except:
+                print(f"[{datetime.now()}] FALHA NA OPERACAO DE DEPOSITO")                
+                conn.send(f"[{datetime.now()}] FALHA NA OPERACAO DE DEPOSITO".encode())
+            
+        #twit pois eh "type withdraw" (de retirar da conta)
+        if data[0:4] == "twit":
+            print(f"[{datetime.now()}] RECEBIDA UMA SOLICITACAO DE SAQUE")
+            try:
+                conta_blockchain.adicionar_bloco('saque', int(data[5:]))
+                conn.send(f"[{datetime.now()}] OPERACAO DE SAQUE BEM SUCEDIDA".encode())
+                print(f"[{datetime.now()}] OPERACAO DE SAQUE BEM SUCEDIDA")
+            except:
+                print(f"[{datetime.now()}] FALHA NA OPERACAO DE SAQUE, VERIFIQUE SE VOCÊ TEM SALDO PARA ESTA OPERACAO")                
+                conn.send(f"[{datetime.now()}] FALHA NA OPERACAO DE SAQUE".encode()) #deu ruim tentar mandar so string, tem que ter o encode pra transformar em byte
 
-
+        #tbal pois eh type balance (de ver o balanco da conta)
+        if data[0:4] == "tbal":
+            print(f"[{datetime.now()}] RECEBIDA UMA SOLICITACAO DE VER BALANCO")
+            try:
+                balance = conta_blockchain.calcular_saldo()
+                conn.send(f"[{datetime.now()}] BALANCO DA CONTA: {balance}".encode())
+                print(f"[{datetime.now()}] OPERACAO DE VER BALANCO BEM SUCEDIDA")
+            except:
+                conn.send(f"[{datetime.now()}] FALHA NA OPERACAO DE VER BALANCO".encode())
+                print(f"[{datetime.now()}] FALHA NA OPERACAO DE VER BALANCO")                
+            
     # Envia resposta
     # print(f"[{datetime.now()}] MENSAGEM SENDO ENVIADA para {addr}")
     # conn.send("MESSAGE".encode())
