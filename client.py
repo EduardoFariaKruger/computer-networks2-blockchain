@@ -2,9 +2,9 @@ import socket
 
 def main():
     #informacoes do servidor, pode ser que o server esteja rodando em uma maquina diferente, eu mesmo rodei em uma rpi e funcionou
-    host = '127.0.0.1'
+    host = '157.151.0.151'
     port = 5000
-
+ 
     # Cria e conecta o socket TCP
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((host, port))
