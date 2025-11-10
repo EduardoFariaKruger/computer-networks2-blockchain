@@ -11,7 +11,7 @@ print(f"UNIVERSIDADE FEDERAL DO PARANÁ, {current_datetime}")
 print("============================================================")
 
 
-conta_blockchain = Blockchain(2000)  # saldo inicial da conta e criacao de fato da conta no servidor
+conta_blockchain = Blockchain("Joao", 3000)  # saldo inicial da conta e criacao de fato da conta no servidor
 
 #cria o socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
