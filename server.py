@@ -17,6 +17,7 @@ conta_blockchain = Blockchain("Joao", 3000)  # saldo inicial da conta e criacao 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 #endereco e porta que o servidor vai ficar na maquina que esta rodando
+#mudar para 0.0.0.0 quando ta na VM pra permitir conexoes vindas de fora
 host = '127.0.0.1'  # localhost
 port = 5000
 
@@ -83,6 +84,12 @@ while True:
             except:
                 conn.send(f"[{datetime.now()}] FALHA NA OPERACAO DE VER BALANCO".encode())
                 print(f"[{datetime.now()}] FALHA NA OPERACAO DE VER BALANCO")                
+
+        #tdra pois eh type draw (pra desenhar a blockchain)
+        if data[0:4] == 'tdra':
+            print(f"[{datetime.now()}] RECEBIDA UMA SOLICITACAO DE DESENHO".encode())
+            conn.send(f"[{datetime.now()}] SEGUE O DESENHO:".encode())
+            conn.send(f"{conta_blockchain.imprimir_cadeia()}".encode())
             
     # Envia resposta
     # print(f"[{datetime.now()}] MENSAGEM SENDO ENVIADA para {addr}")

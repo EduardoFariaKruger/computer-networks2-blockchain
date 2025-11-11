@@ -86,7 +86,7 @@ class Blockchain:
         i = 0
         while atual:
             print(f"Bloco {i}:")
-            if hasattr(atual, "proprietario"):
+            if hasattr(atual, "proprietario"): #serve so pro primeiro caso que eh o bloco inicial
                 print(f"  Proprietário: {atual.proprietario}")
             print(f"  Operação: {atual.operacao}")
             print(f"  Valor: {atual.valor}")
