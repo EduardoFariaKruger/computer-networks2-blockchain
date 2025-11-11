@@ -84,12 +84,20 @@ class Blockchain:
     def imprimir_cadeia(self):
         atual = self.bloco_inicial
         i = 0
+        saida = ""
+
         while atual:
-            print(f"Bloco {i}:")
-            if hasattr(atual, "proprietario"): #serve so pro primeiro caso que eh o bloco inicial
-                print(f"  Proprietário: {atual.proprietario}")
-            print(f"  Operação: {atual.operacao}")
-            print(f"  Valor: {atual.valor}")
-            print(f"  Hash atual: {atual.hash_atual}\n")
+            saida += f"Bloco {i}:\n"
+            if hasattr(atual, "proprietario"):  # apenas no bloco inicial
+                saida += f"  Proprietário: {atual.proprietario}\n"
+            saida += f"  Operação: {atual.operacao}\n"
+            saida += f"  Valor: {atual.valor}\n"
+            saida += f"  Hash atual: {atual.hash_atual}\n\n"
+
             atual = atual.proximo
             i += 1
+
+        if saida:
+            return saida
+        else:
+            return "BlockChainVazia" #nao pode acontecer pq  blockchain ja eh inicializada com valor dentro
