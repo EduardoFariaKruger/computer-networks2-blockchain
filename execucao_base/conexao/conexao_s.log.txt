@@ -1,0 +1,9 @@
+============================================================
+INICIO DA EXECUCAO DO SERVIDOR
+TRABALHO DE REDES 2 PROFESSOR ELIAS
+UNIVERSIDADE FEDERAL DO PARANÁ, 2025-11-12 15:39:50.215313
+============================================================
+Servidor escutando em 127.0.0.1:5000...
+SERVER - [2025-11-12 15:39:50.215438] AGUARDANDO CONEXAO EM 127.0.0.1:5000
+SERVER - [2025-11-12 15:40:05.610505] CONEXAO ESTABELECIDA COM ('127.0.0.1', 53810)
+

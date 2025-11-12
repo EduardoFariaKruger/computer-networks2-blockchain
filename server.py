@@ -2,6 +2,7 @@
 from datetime import datetime
 import socket
 from BlockChain import Bloco, Blockchain
+from decimal import Decimal, ROUND_HALF_UP
 
 current_datetime = datetime.now()
 print("============================================================")
@@ -56,7 +57,9 @@ while True:
             if data[0:4] == "tadd":
                 print(f"SERVER - [{datetime.now()}] RECEBIDA UMA SOLICITACAO DE DEPOSITO")
                 try:
-                    conta_blockchain.adicionar_bloco('deposito', int(data[5:]))
+                    valor_preciso = Decimal(data[5:]).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+                    conta_blockchain.adicionar_bloco('deposito', valor_preciso)
+
                     conn.send(f"[{datetime.now()}] OPERACAO DE DEPOSITO BEM SUCEDIDA".encode())
                     print(f"SERVER - [{datetime.now()}] OPERACAO DE DEPOSITO BEM SUCEDIDA")
                 except:
@@ -67,7 +70,9 @@ while True:
             if data[0:4] == "twit":
                 print(f"[{datetime.now()}] RECEBIDA UMA SOLICITACAO DE SAQUE")
                 try:
-                    conta_blockchain.adicionar_bloco('saque', int(data[5:]))
+                    valor_preciso = Decimal(data[5:]).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+                    conta_blockchain.adicionar_bloco('saque', valor_preciso)
+
                     conn.send(f"[{datetime.now()}] OPERACAO DE SAQUE BEM SUCEDIDA".encode())
                     print(f"SERVER - [{datetime.now()}] OPERACAO DE SAQUE BEM SUCEDIDA")
                 except:

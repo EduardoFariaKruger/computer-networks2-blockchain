@@ -10,17 +10,16 @@ def main():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((host, port))
 
-    print("=====================================")
-    print("   CLIENTE - BLOCKCHAIN BANCÁRIA     ")
-    print("=====================================")
-    print("1 - Depósito")
-    print("2 - Saque")
-    print("3 - Ver saldo")
-    print("4 - Ver BlockChain")
-    print("0 - Sair")
-    print("=====================================")
-
     while True:
+        print("=====================================")
+        print("   CLIENTE - BLOCKCHAIN BANCÁRIA     ")
+        print("=====================================")
+        print("1 - Depósito")
+        print("2 - Saque")
+        print("3 - Ver saldo")
+        print("4 - Ver BlockChain")
+        print("0 - Sair")
+        print("=====================================")
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":

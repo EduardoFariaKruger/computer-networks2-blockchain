@@ -66,8 +66,10 @@
     <h2>Implementação</h2>
     <li>Para a implementação do trabalho prático, foi utilizado a linguagem <a href="https://docs.python.org/3/"><i>Python3</i></a>, com as bibliotecas
     <a href="https://docs.python.org/3/library/hashlib.html#hashlib.sha256"><i>hashlib(sha256)</i></a>,
-    <a href="https://docs.python.org/3/library/datetime.html#module-datetime"><i>datetime</i></a> e
-    <a href="https://docs.python.org/3/library/socket.html#module-socket">socket</a>
+    <a href="https://docs.python.org/3/library/datetime.html#module-datetime"><i>datetime</i></a>,
+    <a href="https://docs.python.org/3/library/socket.html#module-socket">socket</a> e
+    <a href="https://docs.python.org/3/library/decimal.html">decimal</a>.
+    
     </li>
     <li>Para a troca de mensagem, foi utilizado o seguinte padrão: <i>TIPO:{valor}</i>, sendo o <i>tipo</i> uma sequência de 4 caracteres, que representam 4 funções: (1) <i>tadd</i>, (2) <i>twit</i>, (3) <i>tbal</i> e (4) <i>tdra</i></li>
     <li>Para a função de encerramento de conexão, é enviado uma mensagem fora do padrão, contendo apenas <i>"FIN"</i>, além do fechamento do socket por meio do comando <i>client_socket.close()</i>. </li>
