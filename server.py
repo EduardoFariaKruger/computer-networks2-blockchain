@@ -12,7 +12,7 @@ print(f"UNIVERSIDADE FEDERAL DO PARANÁ, {current_datetime}")
 print("============================================================")
 
 
-conta_blockchain = Blockchain("Joao", 3000)  # saldo inicial da conta e criacao de fato da conta no servidor
+conta_blockchain = Blockchain("Joao", 0)  # saldo inicial da conta e criacao de fato da conta no servidor
 
 #cria o socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -58,6 +58,8 @@ while True:
                 print(f"SERVER - [{datetime.now()}] RECEBIDA UMA SOLICITACAO DE DEPOSITO")
                 try:
                     valor_preciso = Decimal(data[5:]).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+                    if valor_preciso < 0:
+                        raise ValueError("Valor de depósito negativo. Operação INVÁLIDA!")
                     conta_blockchain.adicionar_bloco('deposito', valor_preciso)
 
                     conn.send(f"[{datetime.now()}] OPERACAO DE DEPOSITO BEM SUCEDIDA".encode())
@@ -71,6 +73,8 @@ while True:
                 print(f"[{datetime.now()}] RECEBIDA UMA SOLICITACAO DE SAQUE")
                 try:
                     valor_preciso = Decimal(data[5:]).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+                    if valor_preciso < 0:
+                        raise ValueError("Valor de depósito negativo. Operação INVÁLIDA!")
                     conta_blockchain.adicionar_bloco('saque', valor_preciso)
 
                     conn.send(f"[{datetime.now()}] OPERACAO DE SAQUE BEM SUCEDIDA".encode())

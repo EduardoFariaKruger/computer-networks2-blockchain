@@ -1,0 +1,9 @@
+começa zerado
+deposita 1000
+saque 1500
+imprime saldo
+deposita -1000
+imprime saldo
+saque -500
+imprime saldo
+imprime blockchain

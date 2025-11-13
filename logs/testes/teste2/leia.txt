@@ -1,0 +1,10 @@
+começa zerado
+deposita 0.02
+deposita 1.34
+mostra saldo
+saque 0.01
+saque 0.43
+mostra saldo
+deposita 23.1
+saque 23
+imprime blockchain

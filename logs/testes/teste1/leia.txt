@@ -1,0 +1,8 @@
+conta começa zerada
+deposito 1000
+deposito 1500
+imprime saldo
+retira 300
+deposita 0.01
+retira 123.2
+imprime saldo
